@@ -1,0 +1,78 @@
+# Flutter/Dart specific
+/ebookstore/.dart_tool/
+/ebookstore/.idea/
+/ebookstore/.vscode/
+/ebookstore/build/
+/ebookstore/ios/Pods/
+/ebookstore/ios/*.mode1v3
+/ebookstore/ios/*.mode2v3
+/ebookstore/ios/*.perspectivev3
+/ebookstore/ios/*.xcworkspace
+/ebookstore/ios/*.xcuserstate
+/ebookstore/android/.gradle/
+/ebookstore/android/app/build/
+/ebookstore/android/key.properties
+/ebookstore/web/build/
+/ebookstore/macos/Pods/
+/ebookstore/macos/Flutter/ephemeral/.app.flutter_assets/
+/ebookstore/macos/Flutter/ephemeral/Flutter-Generated.xcconfig
+/ebookstore/macos/Flutter/AppFrameworkInfo.plist
+/ebookstore/linux/flutter_linux/flutter_linux.iml
+/ebookstore/linux/CMakeLists.txt
+/ebookstore/windows/flutter_windows/flutter_windows.iml
+
+# Firebase config files
+/ebookstore/android/app/google-services.json
+/ebookstore/ios/Runner/GoogleService-Info.plist
+
+# Other
+*.lock
+*.log
+*.tmp
+*.swp
+.DS_Store
+*.sublime*
+Thumbs.db
+Desktop.ini
+
+# Additional Flutter/Dart specific
+/ebookstore/.metadata/
+/ebookstore/.packages
+/ebookstore/.pub-cache/
+/ebookstore/.pub/
+/ebookstore/.flutter-plugins
+/ebookstore/.flutter-plugins-dependencies
+
+# Gradle files
+/ebookstore/gradle/
+/ebookstore/.gradle/
+/ebookstore/gradlew
+/ebookstore/gradlew.bat
+/ebookstore/gradle-wrapper.jar
+/ebookstore/gradle-wrapper.properties
+/ebookstore/local.properties
+
+# Xcode files
+/ebookstore/ios/Flutter/AppFrameworkInfo.plist
+/ebookstore/ios/Runner.xcodeproj/
+/ebookstore/ios/Runner.xcworkspace/
+/ebookstore/ios/Podfile.lock
+/ebookstore/ios/Pods/
+
+# macOS
+/ebookstore/macos/Flutter/Flutter-Generated.xcconfig
+/ebookstore/macos/Flutter/Generated.xcconfig
+/ebookstore/macos/Flutter/Flutter.framework
+/ebookstore/macos/Flutter/flutter_export_environment.sh
+/ebookstore/macos/Podfile.lock
+/ebookstore/macos/Pods/
+
+# Windows
+/ebookstore/windows/flutter_windows/FlutterWindowsPlugin/GeneratedPluginRegistrant.*
+/ebookstore/windows/flutter_windows/flutter_windows.vcxproj
+/ebookstore/windows/flutter_windows/ephemeral/GeneratedPluginRegistrant.*
+
+# Linux
+/ebookstore/linux/flutter_linux/flutter_linux.vcxproj
+/ebookstore/linux/flutter_linux/flutter_linux_plugin_registrant.cc
+/ebookstore/linux/flutter_linux/flutter_linux_plugin_registrant.h

@@ -1,0 +1,545 @@
+@startuml
+set namespaceSeparator ::
+
+' class "ebookstore::widgets::order_item.dart::OrderItem" {
+'   +OrderItem order
+'   +State<OrderItem> createState()
+' }
+
+' "ebookstore::widgets::order_item.dart::OrderItem" o-- "ebookstore::providers::commande.dart::OrderItem"
+' "flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ebookstore::widgets::order_item.dart::OrderItem"
+
+' class "ebookstore::widgets::order_item.dart::_OrderItemState" {
+'   -bool _expanded
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::State" <|-- "ebookstore::widgets::order_item.dart::_OrderItemState"
+
+' class "ebookstore::widgets::panier_item.dart::PanierItem" {
+'   +String id
+'   +String idProduit
+'   +String title
+'   +int qte
+'   +double price
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::widgets::panier_item.dart::PanierItem"
+
+' class "ebookstore::widgets::auth_card.dart::AuthCard" {
+'   +State<StatefulWidget> createState()
+' }
+
+' "flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ebookstore::widgets::auth_card.dart::AuthCard"
+
+' class "ebookstore::widgets::auth_card.dart::_AuthCardState" {
+'   -GlobalKey<FormState> _formKey
+'   -AuthMode _authMode
+'   -Map<String, String> _authData
+'   -TextEditingController _passwordController
+'   -FocusNode _passwordFocusNode
+'   -FocusNode _confirmPasswordFocusNode
+'   -Animation<Offset> _slideAnimation
+'   -Animation<double> _opacityAnimation
+'   -AnimationController _animationController
+'   -bool _isLoading
+'   +void initState()
+'   +void dispose()
+'   +Widget build()
+'   -Widget _signInWithGoogle()
+'   -void _switchAuthMode()
+'   -Future<void> _submit()
+'   -void _showErrorDialog()
+'   -Widget _alertDialog()
+' }
+
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "ebookstore::widgets::auth_card.dart::AuthMode"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::animation::animation.dart::Animation<Offset>"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::animation::animation.dart::Animation<double>"
+' "ebookstore::widgets::auth_card.dart::_AuthCardState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+' "flutter::src::widgets::framework.dart::State" <|-- "ebookstore::widgets::auth_card.dart::_AuthCardState"
+' "flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "ebookstore::widgets::auth_card.dart::_AuthCardState"
+
+' class "ebookstore::widgets::auth_card.dart::AuthMode" {
+'   +int index
+'   {static} +List<AuthMode> values
+'   {static} +AuthMode Signup
+'   {static} +AuthMode Login
+' }
+
+' "ebookstore::widgets::auth_card.dart::AuthMode" o-- "ebookstore::widgets::auth_card.dart::AuthMode"
+' "dart::core::Enum" <|-- "ebookstore::widgets::auth_card.dart::AuthMode"
+
+' class "ebookstore::widgets::produit_item.dart::ProductItem" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::widgets::produit_item.dart::ProductItem"
+
+' class "ebookstore::widgets::produits_grid.dart::ProduitsGrid" {
+'   +bool showFavs
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::widgets::produits_grid.dart::ProduitsGrid"
+
+' class "ebookstore::widgets::category_item.dart::CategoryItem" {
+'   +String id
+'   +String title
+'   +Color color
+'   +void selectCategory()
+'   +Widget build()
+' }
+
+' "ebookstore::widgets::category_item.dart::CategoryItem" o-- "dart::ui::Color"
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::widgets::category_item.dart::CategoryItem"
+
+' class "ebookstore::app.dart::MyApp" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::app.dart::MyApp"
+
+class "ebookstore::models::category.dart::Category" {
+  +String id
+  +String title
+  +Color color
+}
+
+"ebookstore::models::category.dart::Category" o-- "dart::ui::Color"
+
+class "ebookstore::models::user.dart::User" {
+  +String userId
+  +String nom
+  +String prenom
+  +int age
+  +String tel
+  +String mail
+  +String gender
+}
+
+' class "ebookstore::models::book_model.dart::BookModel" {
+'   +String id
+'   +String? etag
+'   +Uri? selfLink
+'   +BookInfo info
+'   +String toString()
+'   +Map<String, dynamic> toMap()
+' }
+
+' "ebookstore::models::book_model.dart::BookModel" o-- "ebookstore::models::book_model.dart::BookInfo"
+
+' class "ebookstore::models::book_model.dart::BookInfo" {
+'   +String title
+'   +List<String> authors
+'   +String publisher
+'   +String description
+'   +int pageCount
+'   +List<String>? categories
+'   +double averageRating
+'   +int ratingsCount
+'   +String maturityRating
+'   +String contentVersion
+'   +Map<String, Uri> imageLinks
+'   +String language
+'   +Map<String, dynamic> toMap()
+'   +String toString()
+' }
+
+' class "ebookstore::services::auth.dart::AuthService" {
+'   +Stream<User?> userStream
+'   +User? user
+'   +Future<void> anonLogin()
+'   +Future<void> signOut()
+'   +Future<void> googleLogin()
+' }
+
+' "ebookstore::services::auth.dart::AuthService" o-- "dart::async::Stream<User>"
+' "ebookstore::services::auth.dart::AuthService" o-- "firebase_auth::firebase_auth.dart::User"
+
+' class "ebookstore::services::connectivity_utils.dart::ConnectivityUtils" {
+'   {static} -ConnectivityUtils _singleton
+'   +StreamController<dynamic> connectionChangeController
+'   -Connectivity _connectivity
+'   +Stream<dynamic> connectionChange
+'   {static} +ConnectivityUtils getInstance()
+'   +void initialize()
+'   +void dispose()
+'   -void _connectionChange()
+'   +Future<bool> isConnected()
+'   -Future<bool> _updateConnectionStatus()
+' }
+
+' "ebookstore::services::connectivity_utils.dart::ConnectivityUtils" o-- "ebookstore::services::connectivity_utils.dart::ConnectivityUtils"
+' "ebookstore::services::connectivity_utils.dart::ConnectivityUtils" o-- "dart::async::StreamController<dynamic>"
+' "ebookstore::services::connectivity_utils.dart::ConnectivityUtils" o-- "connectivity_plus::connectivity_plus.dart::Connectivity"
+' "ebookstore::services::connectivity_utils.dart::ConnectivityUtils" o-- "dart::async::Stream<dynamic>"
+
+' class "ebookstore::services::db_helper.dart::DBHelper" {
+'   {static} -DBHelper _instance
+'   {static} -Database? _db
+'   +Future<Database?> db
+'   {static} +dynamic initDb()
+'   +Future<void> insert()
+'   +Future<void> delete()
+'   +Future<void> update()
+'   +Future<List<Map<String, dynamic>>> getData()
+'   +Future<dynamic> clear()
+' }
+
+' "ebookstore::services::db_helper.dart::DBHelper" o-- "ebookstore::services::db_helper.dart::DBHelper"
+' "ebookstore::services::db_helper.dart::DBHelper" o-- "sqflite_common::sqlite_api.dart::Database"
+
+' class "ebookstore::screens::splash_screen.dart::SplashScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::splash_screen.dart::SplashScreen"
+
+' class "ebookstore::screens::login_screen.dart::LoginScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::login_screen.dart::LoginScreen"
+
+' class "ebookstore::screens::login_screen.dart::LoginButton" {
+'   +Color color
+'   +IconData icon
+'   +String text
+'   +Function loginMethod
+'   +Widget build()
+' }
+
+' "ebookstore::screens::login_screen.dart::LoginButton" o-- "dart::ui::Color"
+' "ebookstore::screens::login_screen.dart::LoginButton" o-- "flutter::src::widgets::icon_data.dart::IconData"
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::login_screen.dart::LoginButton"
+
+' class "ebookstore::screens::produit_detail_screen.dart::ProductDetailScreen" {
+'   {static} +String routeName
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::produit_detail_screen.dart::ProductDetailScreen"
+
+' class "ebookstore::screens::orders_screen.dart::OrdersScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::orders_screen.dart::OrdersScreen"
+
+' class "ebookstore::screens::cart_screen.dart::CartScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::cart_screen.dart::CartScreen"
+
+' class "ebookstore::screens::cart_screen.dart::OrderButton" {
+'   +Panier panier
+'   +State<OrderButton> createState()
+' }
+
+' "ebookstore::screens::cart_screen.dart::OrderButton" o-- "ebookstore::providers::panier.dart::Panier"
+' "flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ebookstore::screens::cart_screen.dart::OrderButton"
+
+' class "ebookstore::screens::cart_screen.dart::_OrderButtonState" {
+'   -bool _isLoading
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::State" <|-- "ebookstore::screens::cart_screen.dart::_OrderButtonState"
+
+' class "ebookstore::screens::auth_screen.dart::AuthScreen" {
+'   {static} +String routeName
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::auth_screen.dart::AuthScreen"
+
+' class "ebookstore::screens::book_category_screen.dart::CategoryBookScreen" {
+'   {static} +String routeName
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::book_category_screen.dart::CategoryBookScreen"
+
+' class "ebookstore::screens::categories_screen.dart::CategoriesScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::categories_screen.dart::CategoriesScreen"
+
+' class "ebookstore::screens::profile_screen.dart::ProfileScreen" {
+'   +Widget build()
+' }
+
+' "flutter::src::widgets::framework.dart::StatelessWidget" <|-- "ebookstore::screens::profile_screen.dart::ProfileScreen"
+
+' class "ebookstore::screens::produits_overview_screen.dart::ProduitsOverviewScreen" {
+'   +State<ProduitsOverviewScreen> createState()
+' }
+
+' "flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ebookstore::screens::produits_overview_screen.dart::ProduitsOverviewScreen"
+
+' class "ebookstore::screens::produits_overview_screen.dart::_ProduitsOverviewScreenState" {
+'   +ConnectivityUtils connectivity
+'   -bool _connectionStatus
+'   -bool _showOnlyFavorites
+'   -bool _isInit
+'   -bool _isLoading
+'   -Future<void> _refreshProduits()
+'   +void initState()
+'   +void didChangeDependencies()
+'   +Widget build()
+'   +void initConnectivity()
+'   +void listenToConnectivityChanges()
+' }
+
+' "ebookstore::screens::produits_overview_screen.dart::_ProduitsOverviewScreenState" o-- "ebookstore::services::connectivity_utils.dart::ConnectivityUtils"
+' "flutter::src::widgets::framework.dart::State" <|-- "ebookstore::screens::produits_overview_screen.dart::_ProduitsOverviewScreenState"
+
+' class "ebookstore::screens::produits_overview_screen.dart::FilterOptions" {
+'   +int index
+'   {static} +List<FilterOptions> values
+'   {static} +FilterOptions Favorites
+'   {static} +FilterOptions All
+' }
+
+' "ebookstore::screens::produits_overview_screen.dart::FilterOptions" o-- "ebookstore::screens::produits_overview_screen.dart::FilterOptions"
+' "dart::core::Enum" <|-- "ebookstore::screens::produits_overview_screen.dart::FilterOptions"
+
+' class "ebookstore::screens::home_screen.dart::HomeScreen" {
+'   +State<HomeScreen> createState()
+' }
+
+' "flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ebookstore::screens::home_screen.dart::HomeScreen"
+
+' class "ebookstore::screens::home_screen.dart::_HomeScreenState" {
+'   +int activeTab
+'   +Widget build()
+'   +Widget getBottomBar()
+'   +Widget getPage()
+' }
+
+' "flutter::src::widgets::framework.dart::State" <|-- "ebookstore::screens::home_screen.dart::_HomeScreenState"
+
+' class "ebookstore::shared::constants.dart::Constants" {
+'   {static} +String BASE_URL
+'   {static} +String SIGN_UP_AUTH_URL
+'   {static} +String LOG_IN_AUTH_URL
+'   {static} +String USERS
+'   {static} +String PRODUCTS
+'   {static} +String USER_FAVORITES
+'   {static} +String ORDERS
+'   {static} +String FIREBASE_STORAGE_FOLDER
+'   {static} +String USER_PRODUCTS_TABLE
+' }
+
+' class "ebookstore::shared::http_exception.dart::HttpException" {
+'   +String message
+'   +String toString()
+' }
+
+' "dart::core::Exception" <|-- "ebookstore::shared::http_exception.dart::HttpException"
+
+' class "ebookstore::shared::dimensions.dart::Dimens" {
+'   {static} +double HEADER_TITLE_BIG
+'   {static} +double MARGIN_16
+'   {static} +double MARGIN_08
+'   {static} +double PADDING_16
+'   {static} +double PADDING_30
+'   {static} +double MARGIN_80
+'   {static} +double ELEVATION
+'   {static} +double CUSTOM_HEIGHT_20
+'   {static} +double CUSTOM_HEIGHT_10
+'   {static} +double SIGNUP_HEIGHT
+'   {static} +double LOGIN_HEIGHT
+' }
+
+' class "ebookstore::shared::strings.dart::Strings" {
+'   {static} +String APP_NAME
+'   {static} +String HOME
+'   {static} +String CATEGORIES
+'   {static} +String CART
+'   {static} +String ORDERS
+'   {static} +String PROFILE
+'   {static} +String EMAIL_HINT
+'   {static} +String PASSWORD_HINT
+'   {static} +String CONFIRM_PASSWORD_HINT
+'   {static} +String INVALID_EMAIL_ERROR
+'   {static} +String SHORT_PASSWORD_ERROR
+'   {static} +String UNMATCHED_PASSWORDS_ERROR
+'   {static} +String LOGIN_LABEL
+'   {static} +String SIGNUP_LABEL
+'   {static} +String CONTINUE_WITH
+'   {static} +String SIGNEGGL
+'   {static} +String LOGOUT
+'   {static} +String ERROR
+'   {static} +String OK
+'   {static} +String DELETE_TITLE
+'   {static} +String DELETE_MESSAGE
+'   {static} +String YES
+'   {static} +String NO
+'   {static} +String CANCEL
+'   {static} +String DELETE_ERROR
+'   {static} +String EMPTY_FIELD
+'   {static} +String INVALID_NUMBER
+'   {static} +String INVALID_NUMBER_2
+'   {static} +String SHORT_DESCRIPTION
+'   {static} +String CART_SCREEN
+'   {static} +String ORDERS_SCREEN
+'   {static} +String TOTAL
+'   {static} +String ORDERNOW
+'   {static} +String ADD2CARTMSG
+'   {static} +String UNDO
+'   {static} +String THEME
+'   {static} +String PENDING
+'   {static} +String NORDERS
+'   {static} +String CURRENCY
+'   {static} +String LOADING
+'   {static} +String ADD2CART
+'   {static} +String DESCRIPTION
+'   {static} +String ONLYFAVS
+'   {static} +String SHOWALL
+' }
+
+' class "ebookstore::providers::google_books_api_provider.dart::GoogleBooksApiProvider" {
+'   -List<BookModel> _searchResults
+'   -String _searchQuery
+'   -bool _loading
+'   +List<BookModel> searchResults
+'   +String searchQuery
+'   +bool loading
+'   +Future<List<BookModel>> queryBooks()
+'   +Future<BookModel> fetchSpecificBook()
+' }
+
+' "flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::google_books_api_provider.dart::GoogleBooksApiProvider"
+
+' class "ebookstore::providers::google_books_api_provider.dart::OrderBy" {
+'   +int index
+'   {static} +List<OrderBy> values
+'   {static} +OrderBy newest
+'   {static} +OrderBy relevance
+' }
+
+' "ebookstore::providers::google_books_api_provider.dart::OrderBy" o-- "ebookstore::providers::google_books_api_provider.dart::OrderBy"
+' "dart::core::Enum" <|-- "ebookstore::providers::google_books_api_provider.dart::OrderBy"
+
+' class "ebookstore::providers::google_books_api_provider.dart::PrintType" {
+'   +int index
+'   {static} +List<PrintType> values
+'   {static} +PrintType all
+'   {static} +PrintType books
+'   {static} +PrintType magazines
+' }
+
+' "ebookstore::providers::google_books_api_provider.dart::PrintType" o-- "ebookstore::providers::google_books_api_provider.dart::PrintType"
+' "dart::core::Enum" <|-- "ebookstore::providers::google_books_api_provider.dart::PrintType"
+
+' class "ebookstore::providers::auth.dart::Auth" {
+'   -FirebaseAuth _auth
+'   +GoogleSignIn googleSignIn
+'   -String? _token
+'   -DateTime? _expiryDate
+'   -String? _userId
+'   -Timer? _authTimer
+'   +ThemeData theme
+'   +Key key
+'   +bool isAuth
+'   +String? token
+'   +String? userId
+'   +ThemeData getTheme
+'   -Future<void> _authenticate()
+'   +Future<void> signup()
+'   +Future<void> login()
+'   +Future<bool> tryAutoLogin()
+'   +Future<void> logout()
+'   -void _autoLogout()
+'   -void _saveUserData()
+'   +Future<bool> signInWithGoogle()
+'   +void setTheme()
+'   +Future<ThemeData> checkAppTheme()
+' }
+
+' "ebookstore::providers::auth.dart::Auth" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+' "ebookstore::providers::auth.dart::Auth" o-- "google_sign_in::google_sign_in.dart::GoogleSignIn"
+' "ebookstore::providers::auth.dart::Auth" o-- "dart::async::Timer"
+' "ebookstore::providers::auth.dart::Auth" o-- "flutter::src::material::theme_data.dart::ThemeData"
+' "ebookstore::providers::auth.dart::Auth" o-- "flutter::src::foundation::key.dart::Key"
+' "flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::auth.dart::Auth"
+
+class "ebookstore::providers::panier.dart::ProduitPanier" {
+  +String idProd
+  +String title
+  +int qte
+  +double price
+}
+
+class "ebookstore::providers::panier.dart::Panier" {
+  -Map<String, ProduitPanier> _prodPan
+  +Map<String, ProduitPanier> prodPan
+  +double totalAmount
+  +int prodPanCount
+  +void ajouterProdPan()
+  +void suppProdPan()
+  +void supp1Prod()
+  +void clear()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::panier.dart::Panier"
+
+class "ebookstore::providers::produit.dart::Produit" {
+  +String id
+  +String title
+  +double price
+  +String description
+  +List<String> category
+  +String imageUrl
+  +bool isFavorite
+  +Future<void> toggleFavoriteStatus()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::produit.dart::Produit"
+
+class "ebookstore::providers::produits.dart::Produits" {
+  -List<Produit> _items
+  -DBHelper _db
+  +String authToken
+  +String userId
+  +List<Produit> items
+  +List<Produit> favoriteItems
+  +Future<void> fetchAndSetProducts()
+  +Future<dynamic> fetchOfflineProducts()
+  +Produit findById()
+  +void addProduct()
+}
+
+"ebookstore::providers::produits.dart::Produits" o-- "ebookstore::services::db_helper.dart::DBHelper"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::produits.dart::Produits"
+
+class "ebookstore::providers::commande.dart::OrderItem" {
+  +String id
+  +double amount
+  +List<ProduitPanier> produits
+  +DateTime dateTime
+}
+
+class "ebookstore::providers::commande.dart::Orders" {
+  -List<OrderItem> _orders
+  +String? authToken
+  +String? userId
+  +List<OrderItem> orders
+  +int ordersCount
+  +void update()
+  +Future<dynamic> fetchAndSetOrders()
+  +Future<bool> addOrders()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "ebookstore::providers::commande.dart::Orders"
+
+
+@enduml
